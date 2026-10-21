@@ -6,7 +6,7 @@
     /* colors */
     --color-white: #ffffff;
     --color-black: #000000;
-    --color-accent: #ff0000;
+    --color-accent: #F7EEDC;
     /* gaps & sizes */
     --gap-around: 40px;
     /* fonts */
@@ -20,10 +20,42 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .nav-container {
+        .nav {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-self: center;
+            gap: 20px;
+            a {
+                text-decoration: none;
+                color: #84592B;
+            }
+        }
+    }
 }
 [data-layout="footer"] {
     padding: var(--gap-around);
     background-color: var(--color-accent);
+    .nav-container {
+        .nav {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-self: center;
+            gap: 20px;
+            a {
+                text-decoration: none;
+                color: #84592B;
+            }
+        }
+    }
 }
 
 /* Styling of all available page components. */
