@@ -67,6 +67,16 @@
             }
         }
     }
+    .socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-self: center;
+        gap: 20px;
+        a{
+            text-decoration: none;
+        }
+    }
 }
 
 /* Styling of all available page components. */
