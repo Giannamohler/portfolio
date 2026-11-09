@@ -6,6 +6,8 @@ use Carbon_Fields\Field;
 Container::make('theme_options', 'Globales')
     ->add_fields([
         Field::make('image', 'logo', 'Logo')->set_required(),
+        Field::make('text', 'email', 'E-Mail-Adresse')
+            ->set_required(),
         Field::make('complex', 'socials', 'Socials')
             ->add_fields([
                 Field::make('text', 'title', 'Titel')->set_required(),
