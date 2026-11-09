@@ -1,105 +1,168 @@
+
 @import "_fonts.css";
 @import "_resets.css";
 
-/* Definition of base styles. */
+/* =========================================
+   BASE STYLES
+========================================= */
+
 :root {
     /* colors */
     --color-white: #ffffff;
     --color-black: #000000;
     --color-accent: #F7EEDC;
+    --color-brown: #783015;
+    --color-brown-light: #84592B;
+    --color-text: #533D2C;
+
     /* gaps & sizes */
     --gap-around: 40px;
+
     /* fonts */
     --font-h1: normal 64px/120% serif;
 }
 
-/* Styling of all available layout components. */
+
+/* =========================================
+   LAYOUT COMPONENTS
+========================================= */
+
+
+/* HEADER */
+
 [data-layout="header"] {
-    padding: var(--gap-around);
+    padding: 24px 5.5%;
     background-color: var(--color-accent);
     position: sticky;
     top: 0;
     z-index: 100;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
+
+    border-bottom: 1px solid rgba(132, 89, 43, 0.2);
+
+    .logo-link {
+        display: block;
+        text-decoration: none;
+    }
+
     .logo {
-    width: 150px;
-    height: auto;
-    display: block;
-}
+        width: 230px;
+        height: auto;
+        display: block;
+    }
+
     .nav-container {
         .nav {
             list-style: none;
             display: flex;
             flex-direction: row;
-            justify-content: flex-end;
-            align-self: center;
-            gap: 20px;
-            a {
-                text-decoration: none;
-                color: #84592B;
+            align-items: center;
+            gap: 32px;
+
+            .nav-item {
+                a {
+                    position: relative;
+                    text-decoration: none;
+                    color: var(--color-brown-light);
+                    font-size: 14px;
+                    transition: opacity 0.2s ease;
+
+                    &:hover {
+                        opacity: 0.65;
+                    }
+                }
             }
         }
     }
 }
+
+
+/* FOOTER */
+
 [data-layout="footer"] {
     padding: var(--gap-around);
     background-color: var(--color-accent);
-   .logo {
-    width: 150px;
-    height: auto;
-    display: block;
-}
+
+    .logo {
+        width: 150px;
+        height: auto;
+        display: block;
+    }
+
     .nav-container {
         .nav {
             list-style: none;
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            align-self: center;
+            align-items: center;
             gap: 20px;
+
             a {
                 text-decoration: none;
-                color: #84592B;
+                color: var(--color-brown-light);
             }
         }
     }
+
     .socials {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        align-self: center;
+        align-items: center;
         gap: 20px;
-        a{
+
+        a {
             text-decoration: none;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
     }
 }
 
-/* Styling of all available page components. */
+
+/* =========================================
+   PAGE COMPONENTS
+========================================= */
+
 [data-page] {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
+
 [data-page="project"] {
     background-color: aquamarine;
 }
 
-/* Styling of all available module components. */
+
+/* =========================================
+   MODULE COMPONENTS
+========================================= */
+
 [data-module] {
     overflow: clip;
     position: relative;
     width: 100%;
 }
+
+
+/* EXAMPLE MODULE */
+
 [data-module="example"] {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
     & > .image {
         position: absolute;
         width: 100%;
@@ -107,6 +170,7 @@
         object-fit: cover;
         inset: 0;
     }
+
     & > .title {
         position: relative;
         color: white;
@@ -115,27 +179,357 @@
     }
 }
 
-/* Styling of all available teaser components. */
 
-/* Styling of utility classes, can be added anywhere in the project. */
+/* =========================================
+   HERO MODULE
+========================================= */
+
+[data-module="hero"] {
+    background-color: var(--color-accent);
+    padding: 80px 5.5% 110px;
+
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 60px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* TEXT */
+
+    .hero-text {
+        max-width: 520px;
+
+        .subtitle {
+            color: var(--color-brown-light);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+        }
+
+        .title {
+            color: var(--color-brown);
+            font: 900 80px/0.95 serif;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            color: var(--color-text);
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 400px;
+            margin-bottom: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+
+            padding: 13px 20px;
+            border: 1px solid var(--color-brown-light);
+            border-radius: 40px;
+
+            color: var(--color-brown-light);
+            text-decoration: none;
+            font-size: 14px;
+
+            transition: all 0.2s ease;
+
+            span {
+                font-size: 18px;
+            }
+
+            &:hover {
+                background-color: var(--color-brown-light);
+                color: var(--color-white);
+            }
+        }
+    }
+
+    /* IMAGES */
+
+    .hero-images {
+        position: relative;
+        min-height: 480px;
+
+        /* Decorative ellipse */
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 75px;
+            border: 1px solid var(--color-brown-light);
+            border-radius: 50%;
+            top: 30px;
+            right: -40px;
+            transform: rotate(-25deg);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .portrait {
+            position: absolute;
+            width: 70%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .secondary-image {
+            position: absolute;
+            width: 50%;
+            height: 40%;
+            object-fit: cover;
+            right: 0;
+            bottom: 0;
+
+            border: 5px solid var(--color-accent);
+            z-index: 2;
+        }
+    }
+}
+
+
+/* =========================================
+   TEASER COMPONENTS
+========================================= */
+
+
+/* =========================================
+   UTILITY CLASSES
+========================================= */
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
 
 /* BREAKPOINT: 3xl */
-@media (max-width: 1514px) {}
+
+@media (max-width: 1514px) {
+
+}
+
 
 /* BREAKPOINT: xl */
-@media (max-width: 1280px) {}
+
+@media (max-width: 1280px) {
+
+    [data-module="hero"] {
+        .hero-text {
+            .title {
+                font-size: 72px;
+            }
+        }
+
+        .hero-images {
+            min-height: 420px;
+        }
+    }
+
+}
+
 
 /* BREAKPOINT: lg */
-@media (max-width: 1024px) {}
+
+@media (max-width: 1024px) {
+
+    [data-layout="header"] {
+        .logo {
+            width: 190px;
+        }
+    }
+
+    [data-module="hero"] {
+        .hero-content {
+            gap: 35px;
+        }
+
+        .hero-text {
+            .title {
+                font-size: 64px;
+            }
+        }
+
+        .hero-images {
+            min-height: 380px;
+        }
+    }
+
+}
+
 
 /* BREAKPOINT: md */
-@media (max-width: 768px) {}
+
+@media (max-width: 768px) {
+
+    [data-layout="header"] {
+        padding: 20px 6%;
+
+        .logo {
+            width: 170px;
+        }
+
+        .nav-container {
+            .nav {
+                gap: 20px;
+            }
+        }
+    }
+
+    [data-module="hero"] {
+        padding: 65px 6% 80px;
+
+        .hero-content {
+            grid-template-columns: 1fr;
+            gap: 45px;
+        }
+
+        .hero-text {
+            max-width: 100%;
+
+            .title {
+                font-size: 60px;
+            }
+
+            .description {
+                max-width: 500px;
+            }
+        }
+
+        .hero-images {
+            min-height: 420px;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+    }
+
+}
+
 
 /* BREAKPOINT: sm */
-@media (max-width: 640px) {}
+
+@media (max-width: 640px) {
+
+    [data-layout="header"] {
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .logo {
+            width: 170px;
+        }
+
+        .nav-container {
+            width: 100%;
+
+            .nav {
+                justify-content: space-between;
+                gap: 16px;
+
+                .nav-item a {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+    [data-layout="footer"] {
+        padding: 30px 6%;
+
+        .nav-container {
+            .nav {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+        }
+
+        .socials {
+            justify-content: flex-start;
+        }
+    }
+
+}
+
 
 /* BREAKPOINT: xs */
-@media (max-width: 425px) {}
+
+@media (max-width: 425px) {
+
+    [data-module="hero"] {
+        padding: 55px 6% 70px;
+
+        .hero-text {
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .title {
+                font-size: 48px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+        }
+
+        .hero-images {
+            min-height: 300px;
+
+            &::after {
+                width: 120px;
+                height: 50px;
+                right: -15px;
+            }
+
+            .secondary-image {
+                border-width: 4px;
+            }
+        }
+    }
+
+}
+
 
 /* BREAKPOINT: xxs */
-@media (max-width: 400px) {}
+
+@media (max-width: 400px) {
+
+    [data-layout="header"] {
+        .logo {
+            width: 145px;
+        }
+
+        .nav-container {
+            .nav {
+                gap: 10px;
+
+                .nav-item a {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    [data-module="hero"] {
+        .hero-text {
+            .title {
+                font-size: 43px;
+            }
+        }
+
+        .hero-images {
+            min-height: 260px;
+        }
+    }
+
+}
