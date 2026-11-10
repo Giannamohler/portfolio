@@ -47,6 +47,46 @@ Container::make('post_meta', 'Module')
 
 
             // =================================
+            // ÜBER MICH
+            // =================================
+
+            ->add_fields('about', 'Über mich', [
+
+                Field::make('text', 'page_title', 'Seitentitel')
+                    ->set_default_value('Über mich')
+                    ->set_required(),
+
+                Field::make('text', 'subtitle', 'Untertitel')
+                    ->set_default_value('Gianna Mohler / Multimedia Production')
+                    ->set_required(),
+
+                Field::make('text', 'title', 'Haupttitel')
+                    ->set_default_value('Hallo, ich bin Gianna.')
+                    ->set_required(),
+
+                Field::make('textarea', 'description', 'Beschreibung')
+                    ->set_required(),
+
+                Field::make('image', 'image', 'Portraitbild')
+                    ->set_required(),
+
+                Field::make('text', 'image_caption', 'Bildlegende'),
+
+                Field::make('text', 'section_label', 'Beschriftung unter Text')
+                    ->set_default_value('Über mich'),
+
+                Field::make('text', 'button_text', 'Button Text')
+                    ->set_default_value('Meine Projekte')
+                    ->set_required(),
+
+                Field::make('text', 'button_link', 'Button Link')
+                    ->set_default_value('/projekte/')
+                    ->set_required(),
+
+            ])
+
+
+            // =================================
             // AUSGEWÄHLTE PROJEKTE
             // =================================
 
@@ -121,8 +161,6 @@ function render_modules(): void {
 
     foreach ($modules as $module) {
 
-        // Daten je nach Modultyp aufbereiten
-
         switch ($module['_type']) {
 
 
@@ -146,6 +184,20 @@ function render_modules(): void {
 
 
             // =================================
+            // ÜBER MICH
+            // =================================
+
+            case 'about':
+
+                $module['image'] = get_media_by_id(
+                    $module['image'],
+                    'full'
+                );
+
+                break;
+
+
+            // =================================
             // AUSGEWÄHLTE PROJEKTE
             // =================================
 
@@ -157,7 +209,7 @@ function render_modules(): void {
 
                 foreach ($selected_projects as $item) {
 
-                    $id = (int) $item['id'];
+                    $id = (int) ($item['id'] ?? 0);
 
                     if (!$id) {
                         continue;
