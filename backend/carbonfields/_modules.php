@@ -1,4 +1,3 @@
-
 <?php
 
 use Carbon_Fields\Container;
@@ -118,6 +117,27 @@ Container::make('post_meta', 'Module')
                     ])
                     ->set_min(1)
                     ->set_max(3)
+                    ->set_required(),
+
+            ])
+
+
+            // =================================
+            // PROJEKTÜBERSICHT
+            // =================================
+
+            ->add_fields('project_overview', 'Projektübersicht', [
+
+                Field::make('text', 'title', 'Seitentitel')
+                    ->set_default_value('Selected Work')
+                    ->set_required(),
+
+                Field::make('text', 'stills_title', 'Titel Stills')
+                    ->set_default_value('Stills')
+                    ->set_required(),
+
+                Field::make('text', 'motion_title', 'Titel Motion')
+                    ->set_default_value('Motion')
                     ->set_required(),
 
             ])
@@ -249,6 +269,58 @@ function render_modules(): void {
                         'url' => get_permalink($id),
 
                     ];
+
+                }
+
+                break;
+
+
+            // =================================
+            // PROJEKTÜBERSICHT
+            // =================================
+
+            case 'project_overview':
+
+                $module['stills_projects'] = [];
+                $module['motion_projects'] = [];
+
+                $projects = get_posts([
+                    'post_type' => 'project',
+                    'post_status' => 'publish',
+                    'posts_per_page' => -1,
+                    'orderby' => [
+                        'menu_order' => 'ASC',
+                        'date' => 'DESC',
+                    ],
+                ]);
+
+                foreach ($projects as $project) {
+
+                    $project_id = $project->ID;
+
+                    $project_data = get_project_by_id($project_id);
+
+                    $terms = get_the_terms(
+                        $project_id,
+                        'project_category'
+                    );
+
+                    if (!is_array($terms)) {
+                        continue;
+                    }
+
+                    $category_slugs = array_map(
+                        fn($term) => $term->slug,
+                        $terms
+                    );
+
+                    if (in_array('stills', $category_slugs, true)) {
+                        $module['stills_projects'][] = $project_data;
+                    }
+
+                    if (in_array('motion', $category_slugs, true)) {
+                        $module['motion_projects'][] = $project_data;
+                    }
 
                 }
 
