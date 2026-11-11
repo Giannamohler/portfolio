@@ -263,7 +263,7 @@ a {
 
 
 /* =========================================
-   6. AUSGEWÄHLTE PROJEKTE
+   6. AUSGEWÃ„HLTE PROJEKTE
 ========================================= */
 
 [data-module="selected-projects"] {
@@ -273,7 +273,7 @@ a {
     padding: 80px var(--gap-around) 100px;
 }
 
-/* Überschrift */
+/* Ãœberschrift */
 
 .projects-heading {
     display: flex;
@@ -765,7 +765,7 @@ a {
         height: 46px;
     }
 
-    /* Ausgewählte Projekte */
+    /* AusgewÃ¤hlte Projekte */
 
     [data-module="selected-projects"] {
         padding-top: 60px;
@@ -868,7 +868,7 @@ a {
 }
 
 /* =========================================
-   ÜBER-MICH-SEITE
+   ÃœBER-MICH-SEITE
 ========================================= */
 
 [data-module="about"] {
@@ -1002,7 +1002,7 @@ a {
 
 
 /* =========================================
-   RESPONSIVE ÜBER-MICH
+   RESPONSIVE ÃœBER-MICH
 ========================================= */
 
 @media (max-width: 1000px) {
@@ -1063,7 +1063,7 @@ a {
 }
 
 /* =========================================
-   13. PROJEKTÜBERSICHT
+   13. PROJEKTÃœBERSICHT
 ========================================= */
 
 [data-page="project-overview"] {
@@ -1359,7 +1359,7 @@ body.project-modal-open {
 }
 
 /* =========================================
-   14. RESPONSIVE PROJEKTÜBERSICHT
+   14. RESPONSIVE PROJEKTÃœBERSICHT
 ========================================= */
 
 @media (max-width: 1000px) {
@@ -1582,4 +1582,96 @@ h6 {
     font-family: var(--font-heading);
     font-weight: 800;
     letter-spacing: -0.035em;
+}
+
+/* =========================================
+   18. RECHTLICHE SEITEN
+========================================= */
+
+[data-page="legal"] {
+    width: 100%;
+    max-width: 1550px;
+    margin: 0 auto;
+    padding: 95px var(--gap-around) 120px;
+}
+
+.legal-page-header {
+    max-width: 900px;
+    margin-bottom: 65px;
+}
+
+.legal-page-eyebrow {
+    margin: 0 0 18px;
+    color: var(--color-text);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.legal-page-title {
+    margin: 0 0 25px;
+    color: var(--color-text-dark);
+    font: var(--font-h1);
+}
+
+.legal-page-intro,
+.legal-page-content {
+    color: var(--color-text-dark);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.legal-page-intro {
+    max-width: 760px;
+}
+
+.legal-page-content {
+    max-width: 820px;
+}
+
+.legal-contact-details,
+.legal-content-section {
+    margin-bottom: 42px;
+}
+
+.legal-contact-details h2,
+.legal-content-section h2 {
+    margin: 0 0 14px;
+    color: var(--color-text-dark);
+    font: var(--font-h3);
+}
+
+.legal-contact-details p,
+.legal-rich-text p {
+    margin: 0 0 16px;
+}
+
+.legal-rich-text ul,
+.legal-rich-text ol {
+    margin: 0 0 18px 22px;
+}
+
+.legal-page-content a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+    [data-page="legal"] {
+        padding-top: 60px;
+        padding-bottom: 75px;
+    }
+
+    .legal-page-header {
+        margin-bottom: 45px;
+    }
+
+    .legal-page-title {
+        font-size: 40px;
+    }
+
+    .legal-contact-details,
+    .legal-content-section {
+        margin-bottom: 34px;
+    }
 }

@@ -159,6 +159,36 @@ Container::make('post_meta', 'Module')
 
 
             // =================================
+            // RECHTLICHE SEITE
+            // =================================
+
+            ->add_fields('legal_page', 'Rechtliche Seite', [
+
+                Field::make('select', 'legal_type', 'Seitentyp')
+                    ->add_options([
+                        'impressum' => 'Impressum',
+                        'datenschutz' => 'Datenschutz',
+                    ])
+                    ->set_required(),
+
+                Field::make('text', 'title', 'Seitentitel')
+                    ->set_required(),
+
+                Field::make('textarea', 'intro', 'Einleitung'),
+
+                Field::make('complex', 'legal_sections', 'Textabschnitte')
+                    ->add_fields([
+                        Field::make('text', 'heading', 'Überschrift')
+                            ->set_required(),
+                        Field::make('rich_text', 'content', 'Text')
+                            ->set_required(),
+                    ])
+                    ->set_layout('tabbed-vertical'),
+
+            ])
+
+
+            // =================================
             // EINSTELLUNGEN
             // =================================
 
@@ -323,6 +353,23 @@ function render_modules(): void {
                     }
 
                 }
+
+                break;
+
+
+            // =================================
+            // RECHTLICHE SEITE
+            // =================================
+
+            case 'legal_page':
+
+                $module['global_contact'] = [
+                    'email' => carbon_get_theme_option('email'),
+                    'street' => carbon_get_theme_option('address_street'),
+                    'postcode' => carbon_get_theme_option('address_postcode'),
+                    'city' => carbon_get_theme_option('address_city'),
+                    'country' => carbon_get_theme_option('address_country'),
+                ];
 
                 break;
 
