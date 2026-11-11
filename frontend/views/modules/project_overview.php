@@ -51,7 +51,7 @@ $sections = [
                             data-carousel-prev
                             aria-label="Vorherige Projekte"
                         >
-                            &#8592;
+                            
                         </button>
 
                         <button
@@ -60,7 +60,7 @@ $sections = [
                             data-carousel-next
                             aria-label="Weitere Projekte"
                         >
-                            &#8594;
+                            
                         </button>
 
                     </div>
@@ -211,9 +211,7 @@ $sections = [
 
                                                             <?php endif; ?>
 
-                                                            <span class="project-video-play-icon">
-                                                                &#9654;
-                                                            </span>
+                                                            <span class="project-video-play-icon" aria-hidden="true"></span>
 
                                                         </button>
 

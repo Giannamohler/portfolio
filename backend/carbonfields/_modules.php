@@ -267,40 +267,11 @@ function render_modules(): void {
                         continue;
                     }
 
-                    $terms = get_the_terms(
-                        $id,
-                        'project_category'
-                    );
+                    // Vollständige Projektdaten laden.
+                    // Diese Daten werden auch für das Projekt-Popup benötigt.
+                    $project_data = get_project_by_id($id);
 
-                    $image_id = carbon_get_post_meta(
-                        $id,
-                        'image'
-                    );
-
-                    $module['projects'][] = [
-
-                        'title' => get_the_title($id),
-
-                        'image' => get_media_by_id(
-                            $image_id,
-                            'full'
-                        ),
-
-                        'description' => carbon_get_post_meta(
-                            $id,
-                            'description'
-                        ),
-
-                        'categories' => is_array($terms)
-                            ? array_map(
-                                fn($term) => $term->name,
-                                $terms
-                            )
-                            : [],
-
-                        'url' => get_permalink($id),
-
-                    ];
+                    $module['projects'][] = $project_data;
 
                 }
 

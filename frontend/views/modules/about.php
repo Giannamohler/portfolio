@@ -1,3 +1,4 @@
+
 <?php
 $data = $args['data'];
 ?>
@@ -8,8 +9,6 @@ $data = $args['data'];
         <h1>
             <?= esc_html($data['page_title']) ?>
         </h1>
-
-        <span class="about-decoration" aria-hidden="true">✳</span>
     </div>
 
     <div class="about-content">
@@ -39,7 +38,6 @@ $data = $args['data'];
                     href="<?= esc_url($data['button_link']) ?>"
                 >
                     <?= esc_html($data['button_text']) ?>
-                    <span aria-hidden="true">↗</span>
                 </a>
 
             </div>

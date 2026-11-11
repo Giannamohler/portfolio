@@ -1,4 +1,3 @@
-
 <?php
 $data = $args['data'];
 ?>
@@ -20,7 +19,6 @@ $data = $args['data'];
 
             <a class="button" href="<?= esc_url($data['button_link']) ?>">
                 <?= esc_html($data['button_text']) ?>
-                <span aria-hidden="true">↗</span>
             </a>
         </div>
 

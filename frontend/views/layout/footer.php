@@ -14,7 +14,6 @@ $email = carbon_get_theme_option('email');
             <a class="footer-arrow"
                href="mailto:<?= esc_attr($email) ?>"
                aria-label="E-Mail schreiben">
-                ↗
             </a>
         </div>
 
