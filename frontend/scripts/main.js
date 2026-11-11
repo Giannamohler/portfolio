@@ -230,7 +230,114 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================
-    // 2. PROJEKT-POP-UPS ÖFFNEN
+    // 2. YOUTUBE-VIDEO-ID ERMITTELN
+    // =========================================
+
+    const getYouTubeId = (url) => {
+
+        try {
+
+            const parsedUrl = new URL(url);
+
+            const hostname = parsedUrl.hostname.replace(/^www\./, '');
+
+            if (hostname === 'youtu.be') {
+
+                return parsedUrl.pathname.split('/').filter(Boolean)[0] || null;
+
+            }
+
+            if (
+                hostname === 'youtube.com' ||
+                hostname === 'm.youtube.com' ||
+                hostname === 'youtube-nocookie.com'
+            ) {
+
+                if (parsedUrl.pathname === '/watch') {
+                    return parsedUrl.searchParams.get('v');
+                }
+
+                const pathParts = parsedUrl.pathname.split('/').filter(Boolean);
+
+                if (
+                    ['embed', 'shorts', 'live'].includes(pathParts[0]) &&
+                    pathParts[1]
+                ) {
+                    return pathParts[1];
+                }
+
+            }
+
+        } catch (error) {
+
+            console.error('Ungültiger YouTube-Link:', error);
+
+        }
+
+        return null;
+
+    };
+
+
+
+    // =========================================
+    // 3. VIDEO ERST BEIM KLICK LADEN
+    // =========================================
+
+    document.addEventListener('click', (event) => {
+
+        const playButton = event.target.closest('[data-project-video-play]');
+
+        if (!playButton) return;
+
+        const placeholder = playButton.closest(
+            '.project-modal-video-placeholder'
+        );
+
+        if (!placeholder) return;
+
+        // Verhindern, dass das Video mehrfach geladen wird
+
+        if (placeholder.querySelector('iframe')) return;
+
+        const youtubeUrl = playButton.dataset.youtubeUrl;
+        const videoId = getYouTubeId(youtubeUrl);
+
+        if (!videoId) {
+
+            console.error('Die YouTube-URL konnte nicht erkannt werden.');
+            return;
+
+        }
+
+        const iframe = document.createElement('iframe');
+
+        iframe.src =
+            'https://www.youtube-nocookie.com/embed/' +
+            encodeURIComponent(videoId) +
+            '?autoplay=1&rel=0&playsinline=1';
+
+        iframe.title = 'YouTube-Video';
+
+        iframe.allow =
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
+        iframe.allowFullscreen = true;
+
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+        iframe.className = 'project-video-iframe';
+
+        placeholder.appendChild(iframe);
+
+        playButton.hidden = true;
+
+    });
+
+
+
+    // =========================================
+    // 4. PROJEKT-POP-UPS ÖFFNEN
     // =========================================
 
     document.addEventListener('click', (event) => {
@@ -260,16 +367,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================
-    // 3. PROJEKT-POP-UPS SCHLIESSEN
+    // 5. VIDEO STOPPEN
     // =========================================
 
-    document.addEventListener('click', (event) => {
+    const stopProjectVideo = (modal) => {
 
-        const closeButton = event.target.closest('[data-project-modal-close]');
+        const placeholders = modal.querySelectorAll(
+            '.project-modal-video-placeholder'
+        );
 
-        if (!closeButton) return;
+        placeholders.forEach((placeholder) => {
 
-        const modal = closeButton.closest('[data-project-modal]');
+            const iframe = placeholder.querySelector('iframe');
+            const playButton = placeholder.querySelector(
+                '[data-project-video-play]'
+            );
+
+            if (iframe) {
+                iframe.remove();
+            }
+
+            if (playButton) {
+                playButton.hidden = false;
+            }
+
+        });
+
+    };
+
+
+
+    // =========================================
+    // 6. PROJEKT-POP-UPS SCHLIESSEN
+    // =========================================
+
+    const closeProjectModal = (modal) => {
 
         if (!modal) return;
 
@@ -278,12 +410,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.classList.remove('project-modal-open');
 
+        // Laufendes Video stoppen
+
+        stopProjectVideo(modal);
+
+    };
+
+
+    document.addEventListener('click', (event) => {
+
+        const closeButton = event.target.closest(
+            '[data-project-modal-close]'
+        );
+
+        if (!closeButton) return;
+
+        const modal = closeButton.closest('[data-project-modal]');
+
+        closeProjectModal(modal);
+
     });
 
 
 
     // =========================================
-    // 4. POP-UP MIT ESCAPE SCHLIESSEN
+    // 7. POP-UP MIT ESCAPE SCHLIESSEN
     // =========================================
 
     document.addEventListener('keydown', (event) => {
@@ -294,10 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!openModal) return;
 
-        openModal.classList.remove('is-open');
-        openModal.setAttribute('aria-hidden', 'true');
-
-        document.body.classList.remove('project-modal-open');
+        closeProjectModal(openModal);
 
     });
 

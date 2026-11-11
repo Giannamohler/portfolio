@@ -1425,3 +1425,357 @@ body.project-modal-open {
         gap: 12px;
     }
 }
+
+/* =========================================
+   15. MOTION VIDEO PLAYER
+========================================= */
+
+.project-modal-video-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    margin-bottom: 35px;
+    background-color: var(--color-footer);
+}
+
+.project-video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.project-video-play img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-video-play:hover img {
+    transform: scale(1.03);
+}
+
+.project-video-play::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 20, 15, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.project-video-play:hover::after {
+    background: rgba(30, 20, 15, 0.4);
+}
+
+.project-video-play-icon {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    padding-left: 5px;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    background-color: var(--color-footer);
+    color: var(--color-accent);
+    font-size: 25px;
+    transition: transform 0.2s ease;
+}
+
+.project-video-play:hover .project-video-play-icon {
+    transform: scale(1.1);
+}
+
+.project-video-iframe {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.project-video-play[hidden] {
+    display: none;
+}
+
+
+/* =========================================
+   RESPONSIVE VIDEO PLAYER
+========================================= */
+
+@media (max-width: 700px) {
+
+    .project-modal-video-placeholder {
+        margin-bottom: 25px;
+    }
+
+    .project-video-play-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 20px;
+    }
+
+}
+/* =========================================
+   16. VERFEINERTE PROJEKT-POP-UPS
+========================================= */
+
+/* Pop-up-Fenster */
+
+.project-modal {
+    padding: 30px;
+}
+
+.project-modal-content {
+    width: min(1180px, 100%);
+    max-height: 92vh;
+    border: 1px solid rgba(84, 42, 25, 0.12);
+    box-shadow: 0 25px 80px rgba(20, 12, 8, 0.22);
+}
+
+/* Schliessen-Button */
+
+.project-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    float: none;
+    width: 46px;
+    height: 46px;
+    margin: 0;
+    border: 1px solid rgba(84, 42, 25, 0.55);
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    font-size: 27px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.project-modal-close:hover {
+    background-color: var(--color-footer);
+    color: var(--color-accent);
+    transform: rotate(90deg);
+}
+
+/* Inhalt ohne zusätzlichen Rahmen */
+
+.project-modal-body {
+    padding: 0 0 65px;
+}
+
+/* Hauptbild bei Stills */
+
+.project-modal-main-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 300px;
+    max-height: 68vh;
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--color-accent);
+}
+
+.project-modal-main-image img {
+    display: block;
+    width: 100%;
+    max-height: 68vh;
+    object-fit: contain;
+}
+
+/* Video bei Motion */
+
+.project-modal-video-placeholder {
+    width: 100%;
+    margin: 0;
+    background-color: var(--color-footer);
+}
+
+.project-video-play img {
+    object-fit: cover;
+}
+
+/* Textbereich */
+
+.project-modal-text {
+    width: min(760px, calc(100% - 80px));
+    max-width: none;
+    margin: 0 auto;
+    padding: 55px 0 0;
+}
+
+.project-modal-meta {
+    gap: 12px 22px;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+}
+
+.project-modal-title {
+    margin-bottom: 25px;
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 1.08;
+}
+
+.project-modal-lead {
+    margin-bottom: 28px;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.6;
+}
+
+.project-modal-description {
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.project-modal-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Bildergalerie bei Stills */
+
+.project-modal-gallery {
+    width: min(1000px, calc(100% - 80px));
+    margin: 55px auto 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 18px;
+}
+
+.project-modal-gallery img {
+    display: block;
+    width: 100%;
+    max-height: 680px;
+    object-fit: contain;
+    background-color: var(--color-accent);
+}
+
+.project-modal-gallery img:nth-child(3n) {
+    grid-column: 1 / -1;
+}
+
+/* Body beim geöffneten Pop-up */
+
+body.project-modal-open {
+    overflow: hidden;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+
+    .project-modal {
+        padding: 20px;
+    }
+
+    .project-modal-content {
+        max-height: 94vh;
+    }
+
+    .project-modal-text {
+        width: calc(100% - 60px);
+        padding-top: 42px;
+    }
+
+    .project-modal-gallery {
+        width: calc(100% - 60px);
+        margin-top: 42px;
+        gap: 14px;
+    }
+
+}
+
+/* Smartphone */
+
+@media (max-width: 700px) {
+
+    .project-modal {
+        padding: 8px;
+    }
+
+    .project-modal-content {
+        width: 100%;
+        max-height: 96vh;
+    }
+
+    .project-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .project-modal-body {
+        padding-bottom: 35px;
+    }
+
+    .project-modal-main-image {
+        min-height: 190px;
+        max-height: 48vh;
+    }
+
+    .project-modal-main-image img {
+        max-height: 48vh;
+    }
+
+    .project-modal-video-placeholder {
+        margin-bottom: 0;
+    }
+
+    .project-modal-text {
+        width: calc(100% - 40px);
+        margin-bottom: 0;
+        padding-top: 32px;
+    }
+
+    .project-modal-meta {
+        margin-bottom: 14px;
+        font-size: 10px;
+    }
+
+    .project-modal-title {
+        margin-bottom: 18px;
+        font-size: 34px;
+    }
+
+    .project-modal-lead {
+        margin-bottom: 20px;
+        font-size: 17px;
+    }
+
+    .project-modal-description {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    .project-modal-gallery {
+        width: calc(100% - 40px);
+        margin-top: 32px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .project-modal-gallery img:nth-child(3n) {
+        grid-column: auto;
+    }
+
+}
