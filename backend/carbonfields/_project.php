@@ -37,10 +37,6 @@ Container::make('post_meta', 'Projekt')
             ->set_attribute('placeholder', 'z. B. 2026')
             ->set_help_text('Jahr, in dem das Projekt entstanden ist.'),
 
-        Field::make('textarea', 'description', 'Beschreibung')
-            ->set_required()
-            ->set_help_text('Kurzer Beschreibungstext für die Projektübersicht.'),
-
 
         // =================================
         // PROJEKTDETAILS

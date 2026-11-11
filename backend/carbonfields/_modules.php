@@ -8,7 +8,7 @@ use Carbon_Fields\Field;
 // 1. MODULE KONFIGURATION
 // =========================================
 
-Container::make('post_meta', 'Module')
+Container::make('post_meta', 'Modul 1')
     ->where('post_type', 'IN', ['page'])
     ->add_fields([
 
@@ -194,7 +194,9 @@ Container::make('post_meta', 'Module')
 
             ->set_layout('tabbed-vertical')
 
-    ]);
+    ])
+    ->set_context('normal')
+    ->set_priority('high');
 
 
 // =========================================

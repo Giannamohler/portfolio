@@ -15,9 +15,9 @@
 :root {
     --color-background: #f5f1e9;
     --color-accent: #f7eedc;
-    --color-text: #85401f;
+    --color-text: #542a19;
     --color-text-dark: #542a19;
-    --color-footer: #783017;
+    --color-footer: #542a19;
     --color-white: #ffffff;
     --color-black: #1a1a1a;
     --color-line: #d8cfc2;
@@ -188,7 +188,7 @@ a {
 .hero-text .description {
     max-width: 420px;
     margin-bottom: 22px;
-    color: #543d30;
+    color: #542a19;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -931,7 +931,7 @@ a {
 }
 
 .about-description {
-    color: #543d30;
+    color: #542a19;
     font-size: 15px;
     line-height: 1.65;
 }
@@ -1327,9 +1327,8 @@ a {
 }
 
 .project-modal-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    column-count: 2;
+    column-gap: 18px;
     margin-top: 35px;
 }
 
@@ -1337,7 +1336,9 @@ a {
     display: block;
     width: 100%;
     height: auto;
+    margin: 0 0 18px;
     object-fit: cover;
+    break-inside: avoid;
 }
 
 .project-modal-video {
@@ -1444,8 +1445,12 @@ body.project-modal-open {
     }
 
     .project-modal-gallery {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        column-count: 1;
+        column-gap: 12px;
+    }
+
+    .project-modal-gallery img {
+        margin-bottom: 12px;
     }
 }
 
@@ -1674,4 +1679,35 @@ h6 {
     .legal-content-section {
         margin-bottom: 34px;
     }
+}
+
+
+/* =========================================
+   PFEILE: PROJEKT-CAROUSEL
+========================================= */
+
+.project-carousel-button {
+    position: relative;
+    font-size: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.project-carousel-button::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+}
+
+.project-carousel-button[data-carousel-prev]::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.project-carousel-button[data-carousel-next]::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
 }
